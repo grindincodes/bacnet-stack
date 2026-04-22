@@ -295,8 +295,6 @@ int main(int argc, char *argv[])
     Send_I_Am_Router_To_Network(DNET_list);
     Send_Network_Number_Is(NULL, DNET_list[0], NETWORK_NUMBER_CONFIGURED);
 
-    handler_cov_init();
-
     /* loop forever */
     for (;;) {
         /* input */

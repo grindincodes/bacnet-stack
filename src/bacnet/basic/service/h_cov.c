@@ -104,6 +104,9 @@ cov_subscription_create(uint32_t list_key)
     if (list_key >= MAX_COV_SUBSCRIPTIONS) {
         return NULL;
     }
+    if (!COV_Subscriptions) {
+        COV_Subscriptions = Keylist_Create();
+    }
     subscription = Keylist_Data(COV_Subscriptions, list_key);
     if (!subscription) {
         subscription = calloc(1, sizeof(BACNET_COV_HANDLER_SUBSCRIPTION));
@@ -301,7 +304,8 @@ int handler_cov_encode_subscriptions(uint8_t *apdu, int apdu_size)
     return apdu_len;
 }
 
-/** Handler to initialize the COV list, clearing and disabling each entry.
+/** Create or reset the COV subscriptions list.
+ *  Note: Not required for COV to function - Keylist is created on first use.
  * @ingroup DSCOV
  */
 void handler_cov_init(void)
