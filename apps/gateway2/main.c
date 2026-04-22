@@ -56,7 +56,7 @@ static uint8_t Rx_Buf[MAX_MPDU] = { 0 };
 /** The list of DNETs that our router can reach.
  *  Only one entry since we don't support downstream routers.
  */
-int DNET_list[2] = {
+int32_t DNET_list[2] = {
     VIRTUAL_DNET, -1 /* Need -1 terminator */
 };
 
@@ -294,8 +294,6 @@ int main(int argc, char *argv[])
     printf("Remote Network DNET Number %d \n", DNET_list[0]);
     Send_I_Am_Router_To_Network(DNET_list);
     Send_Network_Number_Is(NULL, DNET_list[0], NETWORK_NUMBER_CONFIGURED);
-
-    handler_cov_init();
 
     /* loop forever */
     for (;;) {
